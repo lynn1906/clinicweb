@@ -1,6 +1,6 @@
 # README
 
-## GROUP Group11
+## GROUP 11
 
 - Member 1: Tran-Thi-Huong-Ly
 - Member 2: Nguyen-Thi-Huong-Giang
