@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visit-date: 2024-12-18
+  dianosis: MyString
+  treatment: MyString
+  notes: MyString
+  prescription: MyString
+
+two:
+  visit-date: 2024-12-18
+  dianosis: MyString
+  treatment: MyString
+  notes: MyString
+  prescription: MyString

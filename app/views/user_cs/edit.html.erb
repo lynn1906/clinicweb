@@ -1,0 +1,10 @@
+<div class="max-w-3xl mx-auto px-4">
+  <div class="flex items-center justify-between mb-6 flex-wrap">
+    <h1 class="font-bold text-3xl mb-6">Edit user_c</h1>
+    <% if @user_c.persisted? %>
+    <%= button_to 'Destroy', @user_c, method: :delete, class: "text-red-700 underline", data: { turbo_confirm: 'Are you sure?' } %>
+    <% end %>
+  </div>
+
+  <%= render 'form', user_c: @user_c %>
+</div>

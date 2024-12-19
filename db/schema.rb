@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_130018) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_130018) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "patient_id"
+    t.bigint "employee_id"
+    t.date "appointment_date"
+    t.time "appointment_time"
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_appointments_on_employee_id"
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "position"
+    t.date "hire_date"
+    t.integer "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -61,6 +83,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_130018) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "patient_records", force: :cascade do |t|
+    t.date "visit_date"
+    t.string "dianosis"
+    t.string "treatment"
+    t.string "notes"
+    t.string "prescription"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "gender"
+    t.integer "age"
+    t.integer "contact"
+    t.integer "emergency_contact"
+    t.date "date_of_birth"
+    t.string "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_cs", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.string "role"
+    t.string "email"
+    t.integer "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,4 +135,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_130018) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "appointments", "employees"
+  add_foreign_key "appointments", "patients"
 end
