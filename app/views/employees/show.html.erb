@@ -4,10 +4,10 @@
 
     <div class="flex-wrap lg:flex items-center lg:space-x-3">
       <%= link_to employees_path, class: button_class(theme: "transparent") do %>
-      All Employees
+        All Employees
       <% end %>
       <%= link_to edit_employee_path(@employee), class: button_class(theme:"primary") do %>
-      Edit
+        Edit
       <% end %>
     </div>
   </div>
@@ -32,6 +32,10 @@
       <li>
         <p class="font-semibold">Contact:</p>
         <p><%= @employee.contact %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Linked_User:</p>
+        <p><%= @employee.user&.email || "No User Linked" %></p>
       </li>
   </ul>
 </div>

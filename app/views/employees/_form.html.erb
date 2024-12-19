@@ -29,7 +29,11 @@
       </div>
   <div class="mb-6">
         <%= form.label :contact, class: label_class %>
-          <%= form.number_field :contact, class: input_class %>
+          <%= form.text_field :contact, class: input_class %>
+      </div>
+  <div class="mb-6">
+         <%= form.label :user_id, "Linked_User", class: label_class %>
+          <%= form.collection_select :user_id, User.all, :id, :email, { }, class: input_class %>
       </div>
 
 <%= form.submit class: button_class(theme: 'primary') %>

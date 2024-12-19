@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_19_152546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
     t.string "reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
+    t.integer "created_by"
+    t.text "notes"
     t.index ["employee_id"], name: "index_appointments_on_employee_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
@@ -103,9 +106,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
     t.integer "contact"
     t.integer "emergency_contact"
     t.date "date_of_birth"
-    t.string "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "visit_date"
+    t.text "diagnosis"
+    t.text "treatment"
+    t.text "prescription"
+    t.text "notes"
   end
 
   create_table "user_cs", force: :cascade do |t|
@@ -129,6 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_active", default: true
+    t.datetime "last_login_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -137,4 +146,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_072508) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "appointments", "user_cs", column: "created_by"
 end

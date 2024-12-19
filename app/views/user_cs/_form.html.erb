@@ -1,42 +1,52 @@
 <%= form_with(model: user_c) do |form| %>
-<% if user_c.errors.any? %>
-<div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
-  <h2 class="text-lg font-semibold mb-3"><%= pluralize(user_c.errors.count, "error") %> prohibited this user_c from being saved:</h2>
+  <% if user_c.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
+      <h2 class="text-lg font-semibold mb-3"><%= pluralize(user_c.errors.count, "error") %> prohibited this user_c from being saved:</h2>
 
-  <ul class="list-disc leading-relaxed">
-    <% user_c.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+      <ul class="list-disc leading-relaxed">
+        <% user_c.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <!-- Username -->
   <div class="mb-6">
-        <%= form.label :username, class: label_class %>
-          <%= form.text_field :username, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :password, class: label_class %>
-          <%= form.text_field :password, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :role, class: label_class %>
-          <%= form.text_field :role, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :email, class: label_class %>
-          <%= form.text_field :email, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :contact, class: label_class %>
-          <%= form.number_field :contact, class: input_class %>
-      </div>
+    <%= form.label :username, class: label_class %>
+    <%= form.text_field :username, class: input_class %>
+  </div>
 
-<%= form.submit class: button_class(theme: 'primary') %>
+  <!-- Password -->
+  <div class="mb-6">
+    <%= form.label :password, class: label_class %>
+    <%= form.password_field :password, class: input_class %>
+  </div>
 
-<% if user_c.persisted? %>
-<%= link_to "Cancel", user_c, class: "text-neutral-700 underline inline-block ml-3" %>
-<% else %>
-<%= link_to "Cancel", user_cs_path, class:  "text-neutral-700 underline inline-block ml-3" %>
-<% end %>
+  <!-- Role -->
+  <div class="mb-6">
+    <%= form.label :role, class: label_class %>
+    <%= form.text_field :role, class: input_class %>
+  </div>
+
+  <!-- Email -->
+  <div class="mb-6">
+    <%= form.label :email, class: label_class %>
+    <%= form.email_field :email, class: input_class %>
+  </div>
+
+  <!-- Contact -->
+  <div class="mb-6">
+    <%= form.label :contact, class: label_class %>
+    <%= form.text_field :contact, class: input_class, placeholder: "Enter a 10-11 digit number" %>
+  </div>
+
+  <!-- Submit_Button -->
+  <%= form.submit class: button_class(theme: 'primary') %>
+
+  <% if user_c.persisted? %>
+    <%= link_to "Cancel", user_c, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% else %>
+    <%= link_to "Cancel", user_cs_path, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% end %>
 <% end %>

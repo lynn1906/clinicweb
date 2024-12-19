@@ -4,34 +4,46 @@
 
     <div class="flex-wrap lg:flex items-center lg:space-x-3">
       <%= link_to appointments_path, class: button_class(theme: "transparent") do %>
-      All Appointments
+        All Appointments
       <% end %>
       <%= link_to edit_appointment_path(@appointment), class: button_class(theme:"primary") do %>
-      Edit
+        Edit
       <% end %>
     </div>
   </div>
 
   <ul class="text-slate-700">
       <li>
-        <p class="font-semibold">Patient_id:</p>
-        <p><%= @appointment.patient_id %></p>
+        <p class="font-semibold">Patient:</p>
+        <p><%= @appointment.patient.firstname %> <%= @appointment.patient.lastname %></p>
       </li>
       <li>
-        <p class="font-semibold">Employee_id:</p>
-        <p><%= @appointment.employee_id %></p>
+        <p class="font-semibold">Employee:</p>
+        <p><%= @appointment.employee.firstname %> <%= @appointment.employee.lastname %></p>
       </li>
       <li>
-        <p class="font-semibold">Appointment_date:</p>
+        <p class="font-semibold">Appointment_Date:</p>
         <p><%= @appointment.appointment_date %></p>
       </li>
       <li>
-        <p class="font-semibold">Appointment_time:</p>
+        <p class="font-semibold">Appointment_Time:</p>
         <p><%= @appointment.appointment_time %></p>
       </li>
       <li>
         <p class="font-semibold">Reason:</p>
         <p><%= @appointment.reason %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Status:</p>
+        <p><%= @appointment.status.humanize %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Created_By:</p>
+        <p><%= @appointment.user&.full_name || "N/A" %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Notes:</p>
+        <p><%= @appointment.notes.presence || "No additional notes." %></p>
       </li>
   </ul>
 </div>

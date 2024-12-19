@@ -1,21 +1,21 @@
-<div id="<%= dom_id appointment %>">
+<div id="<%= dom_id appointment %>"> 
   <p>
-    <strong>Patient_id:</strong>
-    <%= appointment.patient_id %>
+    <strong>Patient:</strong>
+    <%= appointment.patient.firstname %> <%= appointment.patient.lastname %>
   </p>
 
   <p>
-    <strong>Employee_id:</strong>
-    <%= appointment.employee_id %>
+    <strong>Employee:</strong>
+    <%= appointment.employee.firstname %> <%= appointment.employee.lastname %>
   </p>
 
   <p>
-    <strong>Appointment-date:</strong>
+    <strong>Appointment_Date:</strong>
     <%= appointment.appointment_date %>
   </p>
 
   <p>
-    <strong>Appointment-time:</strong>
+    <strong>Appointment_Time:</strong>
     <%= appointment.appointment_time %>
   </p>
 
@@ -24,4 +24,18 @@
     <%= appointment.reason %>
   </p>
 
+  <p>
+    <strong>Status:</strong>
+    <%= appointment.status.humanize %>
+  </p>
+
+  <p>
+    <strong>Created_By:</strong>
+    <%= appointment.user&.full_name || "N/A" %>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= appointment.notes.presence || "No additional notes." %>
+  </p>
 </div>

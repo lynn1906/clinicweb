@@ -1,42 +1,70 @@
 <%= form_with(model: appointment) do |form| %>
-<% if appointment.errors.any? %>
-<div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
-  <h2 class="text-lg font-semibold mb-3"><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+  <% if appointment.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
+      <h2 class="text-lg font-semibold mb-3"><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
 
-  <ul class="list-disc leading-relaxed">
-    <% appointment.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
+      <ul class="list-disc leading-relaxed">
+        <% appointment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!-- Patient -->
+<div class="mb-6">
+  <%= form.label :patient_id, "Patient ID", class: label_class %>
+  <%= form.collection_select :patient_id, Patient.all, :id, :id, { include_blank: true }, class: input_class %>
 </div>
-<% end %>
 
-  <div class="mb-6">
-        <%= form.label :patient_id, class: label_class %>
-          <%= form.number_field :patient_id, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :employee_id, class: label_class %>
-          <%= form.number_field :employee_id, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :appointment_date, class: label_class %>
-          <%= form.date_field :appointment_date, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :appointment_time, class: label_class %>
-          <%= form.time_field :appointment_time, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :reason, class: label_class %>
-          <%= form.text_field :reason, class: input_class %>
-      </div>
+<!-- Employee -->
+<div class="mb-6">
+  <%= form.label :employee_id, "Employee ID", class: label_class %>
+  <%= form.collection_select :employee_id, Employee.all, :id, :id, { include_blank: true }, class: input_class %>
+</div>
 
-<%= form.submit class: button_class(theme: 'primary') %>
+  <!-- Appointment Date -->
+  <div class="mb-6">
+    <%= form.label :appointment_date, "Appointment Date", class: label_class %>
+    <%= form.date_field :appointment_date, class: input_class %>
+  </div>
 
-<% if appointment.persisted? %>
-<%= link_to "Cancel", appointment, class: "text-neutral-700 underline inline-block ml-3" %>
-<% else %>
-<%= link_to "Cancel", appointments_path, class:  "text-neutral-700 underline inline-block ml-3" %>
-<% end %>
+  <!-- Appointment Time -->
+  <div class="mb-6">
+    <%= form.label :appointment_time, "Appointment Time", class: label_class %>
+    <%= form.time_field :appointment_time, class: input_class %>
+  </div>
+
+  <!-- Reason -->
+  <div class="mb-6">
+    <%= form.label :reason, "Reason", class: label_class %>
+    <%= form.text_field :reason, class: input_class %>
+  </div>
+
+  <!-- Status -->
+  <div class="mb-6">
+    <%= form.label :status, "Status", class: label_class %>
+    <%= form.select :status, Appointment.statuses.keys.map { |status| [status.humanize, status] }, {}, class: input_class %>
+  </div>
+
+  <!-- Created By -->
+  <div class="mb-6">
+    <%= form.label :created_by, "Created By", class: label_class %>
+    <%= form.collection_select :created_by, User.all, :id, :full_name, { }, class: input_class %>
+  </div>
+
+  <!-- Notes -->
+  <div class="mb-6">
+    <%= form.label :notes, "Notes", class: label_class %>
+    <%= form.text_area :notes, class: input_class %>
+  </div>
+
+  <!-- Submit -->
+  <%= form.submit class: button_class(theme: 'primary') %>
+
+  <% if appointment.persisted? %>
+    <%= link_to "Cancel", appointment, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% else %>
+    <%= link_to "Cancel", appointments_path, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% end %>
 <% end %>

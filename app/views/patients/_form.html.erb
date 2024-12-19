@@ -1,54 +1,83 @@
 <%= form_with(model: patient) do |form| %>
-<% if patient.errors.any? %>
-<div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
-  <h2 class="text-lg font-semibold mb-3"><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+  <% if patient.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
+      <h2 class="text-lg font-semibold mb-3"><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
 
-  <ul class="list-disc leading-relaxed">
-    <% patient.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+      <ul class="list-disc leading-relaxed">
+        <% patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="mb-6">
-        <%= form.label :firstname, class: label_class %>
-          <%= form.text_field :firstname, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :lastname, class: label_class %>
-          <%= form.text_field :lastname, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :gender, class: label_class %>
-          <%= form.text_field :gender, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :age, class: label_class %>
-          <%= form.number_field :age, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :contact, class: label_class %>
-          <%= form.number_field :contact, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :emergency_contact, class: label_class %>
-          <%= form.number_field :emergency_contact, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :date_of_birth, class: label_class %>
-          <%= form.date_field :date_of_birth, class: input_class %>
-      </div>
-  <div class="mb-6">
-        <%= form.label :detail, class: label_class %>
-          <%= form.text_field :detail, class: input_class %>
-      </div>
+    <%= form.label :firstname, class: label_class %>
+    <%= form.text_field :firstname, class: input_class %>
+  </div>
 
-<%= form.submit class: button_class(theme: 'primary') %>
+  <div class="mb-6">
+    <%= form.label :lastname, class: label_class %>
+    <%= form.text_field :lastname, class: input_class %>
+  </div>
 
-<% if patient.persisted? %>
-<%= link_to "Cancel", patient, class: "text-neutral-700 underline inline-block ml-3" %>
-<% else %>
-<%= link_to "Cancel", patients_path, class:  "text-neutral-700 underline inline-block ml-3" %>
-<% end %>
+  <div class="mb-6">
+    <%= form.label :gender, class: label_class %>
+    <%= form.text_field :gender, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :age, class: label_class %>
+    <%= form.number_field :age, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :contact, class: label_class %>
+    <%= form.text_field :contact, class: input_class %>
+
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :emergency_contact, class: label_class %>
+    <%= form.text_field :emergency_contact, class: input_class %>
+
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :date_of_birth, class: label_class %>
+    <%= form.date_field :date_of_birth, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :visit_date, class: label_class %>
+    <%= form.date_field :visit_date, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :diagnosis, class: label_class %>
+    <%= form.text_area :diagnosis, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :treatment, class: label_class %>
+    <%= form.text_area :treatment, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :prescription, class: label_class %>
+    <%= form.text_area :prescription, class: input_class %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :notes, class: label_class %>
+    <%= form.text_area :notes, class: input_class %>
+  </div>
+
+  <%= form.submit class: button_class(theme: 'primary') %>
+
+  <% if patient.persisted? %>
+    <%= link_to "Cancel", patient, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% else %>
+    <%= link_to "Cancel", patients_path, class: "text-neutral-700 underline inline-block ml-3" %>
+  <% end %>
 <% end %>

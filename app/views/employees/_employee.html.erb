@@ -24,4 +24,9 @@
     <%= employee.contact %>
   </p>
 
+  <p>
+    <strong>Linked_User:</strong>
+    <%= employee.user&.email || "No User Linked" %>
+  </p>
+
 </div>
